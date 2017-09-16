@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Local Weather</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css">
+  <script type="text/javascript" src="weather.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Free C<i class="wi wi-day-rain"></i>de Camp<br>Weather App</h1>
+    </header>
+    <div id="weather">
+      <p>
+        <span id="city"></span>, <span id="state"></span><br>
+        <div id="temperature">
+          <span id="degrees"></span>
+          <span id="unit">
+            <a href="#" onclick="toggle(this)">℃</a>
+          </span>
+        </div>
+        <span id="description"></span><br>
+        <span id="icon"><img src=""></span>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
