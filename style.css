@@ -43,7 +43,12 @@ header {
 }
 
 a {
-  color: darkgrey;
+  color: #0099ff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0163ae;
 }
 
 #weather {

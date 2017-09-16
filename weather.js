@@ -56,9 +56,9 @@ Step by step:
 window.onload = function() {
   getCoordinates(function(coords) {
     getWeather(coords, function(weather) {
-      getCityState(function(location) {
+      getJSON('http://ipinfo.io', function(location) {
         loadDataIntoDOM(location, weather);
-      })
+      });
     });
   });
 };
@@ -92,66 +92,42 @@ function getCoordinates(_callback) {
   });
 }
 
-// function getJSON(url, _callback) {
-//   var request = new XMLHttpRequest();
-//   request.open('GET', url, true);
-//   request.setRequestHeader('Accept', 'application/json');
-//   request.send();
-
-//   request.onreadystatechange = function() {
-//     if (request.readyState === XMLHttpRequest.DONE) {
-//       _callback(request.response);
-//     }
-//   }
-// }
-
 function getWeather(coords, _callback) {
   var request, response, baseURL, fullURL, weather;
 
   baseURL = 'https://fcc-weather-api.glitch.me/api/current?lat={{lat}}&lon={{lon}}';
   fullURL = baseURL.replace(/{{lat}}/, coords.lat).replace(/{{lon}}/, coords.lon);
-  request = new XMLHttpRequest();
-  request.open('GET', fullURL, true);
-  request.setRequestHeader('Accept', 'application/json');
-  request.send();
 
-  request.onreadystatechange = function() {
-    if (request.readyState === XMLHttpRequest.DONE) {
-      weather = JSON.parse(request.response);
-
-      _callback(weather);
-    }
-  }
+  getJSON(fullURL, _callback);
 }
 
-function getCityState(_callback) {
-  var request, response, city, state;
-
-  request = new XMLHttpRequest();
-  request.open('GET', 'http://ipinfo.io', true);
-  request.setRequestHeader('Accept', 'application/json');
-  request.send();
-
-  request.onreadystatechange = function() {
-    if (request.readyState === XMLHttpRequest.DONE) {
-      response = JSON.parse(request.response);
-
-      _callback({ city: response.city, state: response.region, country: response.country });
-    }
-  }
-}
-
-function toggle(e) {
+function toggleUnit(link) {
   var fahrenheith, celcius, degrees;
+
   degreesNode = document.getElementById('degrees');
   degrees = degreesNode.innerText;
 
-  if (e.innerText === '℃') {
-    e.innerText = '℉';
+  if (link.innerText === '℃') {
+    link.innerText = '℉';
     degreesNode.innerText = celciusToFahrenheit(parseFloat(degrees));
   } else {
-    e.innerText = '℃';
+    link.innerText = '℃';
     degreesNode.innerText = fahrenheitToCelcius(parseFloat(degrees));
+  }
+}
+
+// General purpose get json function using pure javascript
+function getJSON(url, _callback) {
+  var request = new XMLHttpRequest();
+
+  request.open('GET', url, true);
+  request.setRequestHeader('Accept', 'application/json');
+  request.send();
+
+  request.onreadystatechange = function() {
+    if (request.readyState === XMLHttpRequest.DONE) {
+      _callback(JSON.parse(request.response));
+    }
   }
 }
 
