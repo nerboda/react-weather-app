@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -69,50 +69,9 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getJson", function() { return getJson; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizeEachWord", function() { return capitalizeEachWord; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "celciusToFahrenheit", function() { return celciusToFahrenheit; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fahrenheitToCelcius", function() { return fahrenheitToCelcius; });
-function getJSON(url, _callback) {
-  var request = new XMLHttpRequest();
-
-  request.open('GET', url, true);
-  request.setRequestHeader('Accept', 'application/json');
-  request.send();
-
-  request.onreadystatechange = function() {
-    if (request.readyState === XMLHttpRequest.DONE) {
-      _callback(JSON.parse(request.response));
-    }
-  }
-}
-
-function capitalizeEachWord(string) {
-  return _.join(_.map(string.split(' '), (word) => {
-    return word.replace(/^./, word[0].toUpperCase());
-  }), ' ');
-}
-
-function celciusToFahrenheit(temp) {
-  return (temp * 1.8 + 32).toFixed(2);
-}
-
-function fahrenheitToCelcius(temp) {
-  return ((temp - 32) / 1.8).toFixed(2);
-}
-
-
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__style_css__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__style_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__style_css__);
 
@@ -122,7 +81,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 window.onload = function() {
   getCoordinates(function(coords) {
     getWeather(coords, function(weather) {
-      getJSON('https://ipinfo.io', function(location) {
+      Object(__WEBPACK_IMPORTED_MODULE_1__utilities_js__["d" /* getJSON */])('https://ipinfo.io', function(location) {
         loadDataIntoDOM(location, weather);
       });
     });
@@ -134,7 +93,6 @@ function loadDataIntoDOM(location, weather) {
 
   city = document.getElementById('city');
   state = document.getElementById('state');
-  celcius = document.getElementById('celcius');
   temperature = document.getElementById('temperature');
   description = document.getElementById('description');
   icon = document.getElementById('icon');
@@ -143,7 +101,7 @@ function loadDataIntoDOM(location, weather) {
   state.innerText = location.state;
   temperature.childNodes[1].innerText = weather.main.temp;
   temperature.childNodes[2].innerText = '&deg;C';
-  description.innerText = capitalizeEachWord(weather.weather[0].description);
+  description.innerText = Object(__WEBPACK_IMPORTED_MODULE_1__utilities_js__["a" /* capitalizeEachWord */])(weather.weather[0].description);
   icon.childNodes[0].src = weather.weather[0].icon;
 }
 
@@ -164,7 +122,7 @@ function getWeather(coords, _callback) {
   baseURL = 'https://fcc-weather-api.glitch.me/api/current?lat={{lat}}&lon={{lon}}';
   fullURL = baseURL.replace(/{{lat}}/, coords.lat).replace(/{{lon}}/, coords.lon);
 
-  getJSON(fullURL, _callback);
+  Object(__WEBPACK_IMPORTED_MODULE_1__utilities_js__["d" /* getJSON */])(fullURL, _callback);
 }
 
 function toggleUnit(link) {
@@ -175,16 +133,16 @@ function toggleUnit(link) {
 
   if (link.innerText === '℃') {
     link.innerText = '℉';
-    degreesNode.innerText = celciusToFahrenheit(parseFloat(degrees));
+    degreesNode.innerText = Object(__WEBPACK_IMPORTED_MODULE_1__utilities_js__["b" /* celciusToFahrenheit */])(parseFloat(degrees));
   } else {
     link.innerText = '℃';
-    degreesNode.innerText = fahrenheitToCelcius(parseFloat(degrees));
+    degreesNode.innerText = Object(__WEBPACK_IMPORTED_MODULE_1__utilities_js__["c" /* fahrenheitToCelcius */])(parseFloat(degrees));
   }
 }
 
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17273,10 +17231,10 @@ function toggleUnit(link) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3)(module)))
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports) {
 
 var g;
@@ -17303,7 +17261,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -17328,6 +17286,46 @@ module.exports = function(module) {
 	}
 	return module;
 };
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getJSON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return capitalizeEachWord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return celciusToFahrenheit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return fahrenheitToCelcius; });
+function getJSON(url, _callback) {
+  var request = new XMLHttpRequest();
+
+  request.open('GET', url, true);
+  request.setRequestHeader('Accept', 'application/json');
+  request.send();
+
+  request.onreadystatechange = function() {
+    if (request.readyState === XMLHttpRequest.DONE) {
+      _callback(JSON.parse(request.response));
+    }
+  }
+}
+
+function capitalizeEachWord(string) {
+  return _.join(_.map(string.split(' '), (word) => {
+    return word.replace(/^./, word[0].toUpperCase());
+  }), ' ');
+}
+
+function celciusToFahrenheit(temp) {
+  return (temp * 1.8 + 32).toFixed(2);
+}
+
+function fahrenheitToCelcius(temp) {
+  return ((temp - 32) / 1.8).toFixed(2);
+}
+
+
 
 
 /***/ }),

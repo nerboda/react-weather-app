@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import './utilities.js';
+import { getJSON, capitalizeEachWord, celciusToFahrenheit, fahrenheitToCelcius } from './utilities.js';
 import './style.css';
 
 window.onload = function() {
@@ -17,7 +17,6 @@ function loadDataIntoDOM(location, weather) {
 
   city = document.getElementById('city');
   state = document.getElementById('state');
-  celcius = document.getElementById('celcius');
   temperature = document.getElementById('temperature');
   description = document.getElementById('description');
   icon = document.getElementById('icon');

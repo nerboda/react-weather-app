@@ -26,4 +26,4 @@ function fahrenheitToCelcius(temp) {
   return ((temp - 32) / 1.8).toFixed(2);
 }
 
-export { getJson, capitalizeEachWord, celciusToFahrenheit, fahrenheitToCelcius };
+export { getJSON, capitalizeEachWord, celciusToFahrenheit, fahrenheitToCelcius };
