@@ -2,8 +2,14 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: {
-    filename: './src/index.js',
+  entry: [
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    './src/index.js',
+  ],
+  devServer: {
+    contentBase: './dist',
+    hot: true
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -17,15 +23,21 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      }
-    ]
-  }
+    loaders: [{
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      loader: 'react-hot-loader!babel-loader'
+    },
+    {
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        'css-loader'
+      ]
+    }]
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
+  },
 };
 
