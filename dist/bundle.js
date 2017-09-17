@@ -125,17 +125,18 @@ function getWeather(coords, _callback) {
   Object(__WEBPACK_IMPORTED_MODULE_1__utilities_js__["d" /* getJSON */])(fullURL, _callback);
 }
 
-function toggleUnit(link) {
-  var fahrenheith, celcius, degrees;
+var unitLink = document.getElementById('unit').childNodes[1];
 
-  degreesNode = document.getElementById('degrees');
-  degrees = degreesNode.innerText;
+unitLink.onclick = function(e) {
+  e.preventDefault();
+  var degreesNode = document.getElementById('degrees');
+  var degrees = degreesNode.innerText;
 
-  if (link.innerText === '℃') {
-    link.innerText = '℉';
+  if (this.innerText === '℃') {
+    this.innerText = '℉';
     degreesNode.innerText = Object(__WEBPACK_IMPORTED_MODULE_1__utilities_js__["b" /* celciusToFahrenheit */])(parseFloat(degrees));
   } else {
-    link.innerText = '℃';
+    this.innerText = '℃';
     degreesNode.innerText = Object(__WEBPACK_IMPORTED_MODULE_1__utilities_js__["c" /* fahrenheitToCelcius */])(parseFloat(degrees));
   }
 }
