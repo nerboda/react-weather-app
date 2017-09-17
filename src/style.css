@@ -26,6 +26,7 @@ summary::-webkit-details-marker { display: none; }
   background-color: #161616;
   width: 100%;
   height: 100vh;
+  min-height: 800px;
 }
 
 body {
