@@ -52,11 +52,8 @@ a:hover {
   color: #0163ae;
 }
 
-#weather {
+#weather, #city-state {
   line-height: 1.5em;
-}
-
-#weather {
   font-size: 2em;
 }
 

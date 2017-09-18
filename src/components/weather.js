@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
+import { celciusToFahrenheit } from '../utilities';
 
 export default class Description extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      description: '',
-      celcius: 0,
-      fahrenheit: 0,
+      description: props.description,
+      celcius: parseFloat(props.temp, 2),
+      fahrenheit: parseFloat(celciusToFahrenheit(props.temp), 2),
       isCelcius: false
     };
 
     this.toggleUnit = this.toggleUnit.bind(this);
-  }
-
-  celciusToFahrenheit(temp) {
-    return (temp * 1.8 + 32).toFixed(2);
   }
 
   toggleUnit(e) {
@@ -25,31 +22,9 @@ export default class Description extends Component {
     }));
   }
 
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition(position => {
-      const {latitude, longitude} = position.coords;
-      const baseURL = 'https://fcc-weather-api.glitch.me/api/current';
-      const URL = `${baseURL}?lat=${latitude}&lon=${longitude}`;
-      
-      fetch(URL, {
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then(response => {
-        return response.json();
-      }).then(data => {
-        this.setState({
-          description: data.weather[0].main,
-          celcius: parseFloat(data.main.temp, 2),
-          fahrenheit: this.celciusToFahrenheit(parseFloat(data.main.temp, 2))
-        })
-      });
-    });
-  }
-
   render() {
     return (
-      <div id="temperature">
+      <div id="weather">
         <p>{this.state.isCelcius ? this.state.celcius : this.state.fahrenheit}&nbsp;
           <a href="#" onClick={this.toggleUnit}>
             {this.state.isCelcius ? '\u2103': '\u2109'}
