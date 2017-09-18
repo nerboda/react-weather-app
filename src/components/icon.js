@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
 
-export default function Icon() {
-  return <span id="icon"><img src=""/></span>;
+export default class Icon extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    
+  }
+
+  render() {
+    return (
+      <img className="icon" src={this.props.imageSource}/>
+    );
+  }
 }

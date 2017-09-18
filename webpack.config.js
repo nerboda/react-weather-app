@@ -5,6 +5,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
+    'whatwg-fetch',
     './src/index.js',
   ],
   devServer: {
@@ -15,7 +16,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Output Management',
       inject: true,
-      template: 'src/index.html'
+      template: 'src/templates/index.html'
     })
   ],
   output: {

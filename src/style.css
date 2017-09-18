@@ -60,7 +60,7 @@ a:hover {
   font-size: 2em;
 }
 
-#icon {
+.icon {
   display: inline-block;
   background-color: #ececec;
   border-radius: 100%;
