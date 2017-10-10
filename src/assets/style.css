@@ -65,3 +65,11 @@ a:hover {
   height: 50px;
   width: 50px;
 }
+
+.wi {
+  font-size: 2em;
+}
+
+.wi-day-sunny {
+  color: #ffff00;
+}

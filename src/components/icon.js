@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Fuse from 'fuse.js';
-import { NightClasses, DayClasses } from '../addons/weatherIconClasses';
 
 export default class Icon extends Component {
   constructor(props) {
@@ -15,7 +13,7 @@ export default class Icon extends Component {
 
   }
 
-  imageSource() {
+  className() {
     let desc = this.state.description;
     let time = this.state.time;
     let className = 'wi';
@@ -29,33 +27,29 @@ export default class Icon extends Component {
         }
       } else if (desc.match(/cloud/)) {
         className += '-cloudy';
+      } else {
+        className += '-clear';
       }
     } else {
-      className += 'day';
+      className += '-day';
+      if (desc.match(/rain/)) {
+        className += '-rain';
+        if (desc.match(/wind/)) {
+          className += '-wind';
+        }
+      } else if (desc.match(/cloud/)) {
+        className += '-cloudy';
+      } else {
+        className += '-sunny';
+      }
     }
 
-    console.log(fuse);
-    let result = fuse.search(this.state.description);
-    console.log(this.state.description);
-    console.log(dayOrNight);
-    console.log(result);
+    return className;
   }
 
   render() {
     return (
-      <img className="icon" src={this.imageSource()}/>
+      <i className={'wi ' + this.className()} />
     );
   }
 }
-
-/*
-
-- day or night?
-  - if after 8pm and before 5am, show night
-  - else show day
-- description
-  - 
-- addons?
-  - wind?
-  - thunder?
-*/

@@ -6,8 +6,10 @@ import Header from './components/header';
 import CityState from './components/cityState';
 import Weather from './components/weather';
 import Icon from './components/icon';
+import { capitalizeEachWord } from './utilities';
 
-import './style.css';
+import './assets/style.css';
+import './assets/weather-icons/sass/weather-icons.min.scss';
 
 module.hot.accept();
 
@@ -40,7 +42,7 @@ navigator.geolocation.getCurrentPosition(position => {
   }).then(data => {
     const {main: {temp}, weather: [{description}]} = data;
     weather.temp = temp;
-    weather.description = description;
+    weather.description = capitalizeEachWord(description);
 
     ReactDOM.render(
       <App/>,
