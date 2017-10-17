@@ -23,7 +23,7 @@ export default class CityState extends Component {
 
   render() {
     return (
-      <div id="city-state">
+      <div>
         <h3>{this.state.city}, {this.state.state}</h3>
       </div>
     );
