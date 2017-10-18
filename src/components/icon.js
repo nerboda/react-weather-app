@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Label } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 
 export default class Icon extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ export default class Icon extends Component {
 
   render() {
     return (
-      <i className={'wi ' + this.className() + ' inline-block'} />
+      <Image as='i' avatar className={'wi ' + this.className()} />
     );
   }
 }

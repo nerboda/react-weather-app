@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Header } from 'semantic-ui-react';
 import { kelvinToFahrenheit, capitalizeEachWord } from '../utilities';
 
 export default class Description extends Component {
@@ -20,10 +21,7 @@ export default class Description extends Component {
 
   render() {
     return (
-      <div className="inline-block">
-        <p>{this.state.fahrenheit}</p>
-        <h3>{this.state.description}</h3>
-      </div>
-    )
+      <span>{`${this.state.fahrenheit} \u2109 ${this.state.description}`}</span>
+    );
   }
 }

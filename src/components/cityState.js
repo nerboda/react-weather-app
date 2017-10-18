@@ -28,9 +28,7 @@ export default class CityState extends Component {
 
   render() {
     return (
-      <div>
-        <Header size='large'>{this.state.city}, {this.state.state}</Header>
-      </div>
+      <span>{this.state.city}, {this.state.state}</span>
     );
   };
 }

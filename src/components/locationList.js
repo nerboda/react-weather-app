@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Location from './location';
-import { Form, Input } from 'semantic-ui-react';
+import { Form, Input, List, Segment, Header, Divider, Container } from 'semantic-ui-react';
 import { createStore } from 'redux';
 import locationListReducer from '../reducers';
 import { addLocation, removeLocation } from '../actions';
@@ -45,9 +45,10 @@ class LocationList extends Component {
     const locations = store.getState().locations;
 
     return (
-      <div>
-        {locations.map(location => (
-          <div>
+      <Segment>
+        <Divider horizontal>Add More Locations</Divider>
+        <List divided relaxed verticalAlign='middle'>
+          {locations.map(location => (
             <Location
               key={location.id.toString()}
               id={location.id.toString()}
@@ -57,12 +58,14 @@ class LocationList extends Component {
               longitude={location.longitude}
               handleRemove={this.removeLocation}
             />
-          </div>
-        ))}
-        <Form onSubmit={this.addLocation}>
-          <Input action={{ icon: 'add' }} placeholder='City Name or Zip' onChange={this.handleChange}/>
-        </Form>
-      </div>
+          ))}
+        </List>
+        <Container textAlign='center'>
+          <Form onSubmit={this.addLocation}>
+            <Input action={{ icon: 'add' }} placeholder='City Name or Zip' onChange={this.handleChange}/>
+          </Form>
+        </Container>
+      </Segment>
     );
   }
 

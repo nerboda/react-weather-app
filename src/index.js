@@ -76,7 +76,8 @@ class App extends Component {
             latitude={this.state.latitude}
             longitude={this.state.longitude}
             current />
-          <Header>Add More Locations</Header>
+          </Container>
+          <Container>
             <LocationList />
           </Container>
         </div>

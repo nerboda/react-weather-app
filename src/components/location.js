@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CityState from './cityState';
 import Weather from './weather';
 import Icon from './icon';
-import { Divider, Segment, Button } from 'semantic-ui-react';
+import { Divider, Segment, Button, List } from 'semantic-ui-react';
 
 class Location extends Component {
   constructor(props) {
@@ -39,21 +39,33 @@ class Location extends Component {
 
   render() {
     if (this.state.name) {
-      return (
-        <Segment>
-          { this.props.current
-            ? <Divider horizontal>Your Location</Divider>
-            : null
-          }
-          <CityState name={this.state.name} current={ this.props.current ? true : null }/>
-          <Weather temp={this.state.temp} description={this.state.description}/>
-          <Icon description={this.state.description}/>
-          { !this.props.current
-            ? <Button onClick={() => this.props.handleRemove(this.props.id)}>Remove Location</Button>
-            : null
-          }
-        </Segment>
-      );
+      if (this.props.current) {
+        return (
+          <Segment>
+            <Divider horizontal>Your Location</Divider>
+            <CityState name={this.state.name} current={ this.props.current ? true : null }/>
+            <Weather temp={this.state.temp} description={this.state.description}/>
+            <Icon description={this.state.description}/>
+          </Segment>
+        );
+      } else {
+        return (
+          <List.Item>
+            <List.Content floated='right'>
+              <Button onClick={() => this.props.handleRemove(this.props.id)}>Remove Location</Button>
+            </List.Content>
+            <Icon description={this.state.description}/>
+            <List.Content>
+              <List.Header>
+                <CityState name={this.state.name} current={ this.props.current ? true : null }/>
+              </List.Header>
+              <List.Description>
+                <Weather temp={this.state.temp} description={this.state.description}/>
+              </List.Description>
+            </List.Content>
+          </List.Item>
+        );
+      }
     } else {
       return null;
     }

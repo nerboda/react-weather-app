@@ -13,7 +13,8 @@ function fahrenheitToCelcius(temp) {
 }
 
 function kelvinToFahrenheit(temp) {
-  return ((temp / (5/9)) - 459.67).toFixed(2);
+  console.log(temp)
+  return ((9/5) * (temp - 273) + 32).toFixed(0);
 }
 
 export { capitalizeEachWord, celciusToFahrenheit, fahrenheitToCelcius, kelvinToFahrenheit };
