@@ -14,3 +14,7 @@
 .padded {
   padding-top: 50px;
 }
+.current-location .wi {
+  margin-left: 5px;
+  vertical-align: -5px;
+}

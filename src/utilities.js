@@ -13,7 +13,6 @@ function fahrenheitToCelcius(temp) {
 }
 
 function kelvinToFahrenheit(temp) {
-  console.log(temp)
   return ((9/5) * (temp - 273) + 32).toFixed(0);
 }
 

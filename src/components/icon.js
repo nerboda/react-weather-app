@@ -50,7 +50,7 @@ export default class Icon extends Component {
 
   render() {
     return (
-      <Image as='i' avatar className={'wi ' + this.className()} />
+      <i className={'wi ' + this.className()} />
     );
   }
 }

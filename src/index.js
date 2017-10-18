@@ -70,12 +70,12 @@ class App extends Component {
     if (this.state.latitude) {
       return (
         <div>
-          <Container className='padded' textAlign='center'>
-          <Header as='h1' size='huge'>Local Weather</Header>
-          <Location
-            latitude={this.state.latitude}
-            longitude={this.state.longitude}
-            current />
+          <Container className='padded current-location' textAlign='center'>
+            <Header as='h1' size='huge'>Local Weather</Header>
+            <Location
+              latitude={this.state.latitude}
+              longitude={this.state.longitude}
+              current />
           </Container>
           <Container>
             <LocationList />

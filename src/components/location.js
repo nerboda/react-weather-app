@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CityState from './cityState';
 import Weather from './weather';
 import Icon from './icon';
-import { Divider, Segment, Button, List } from 'semantic-ui-react';
+import { Header, Divider, Segment, Button, List } from 'semantic-ui-react';
 
 class Location extends Component {
   constructor(props) {
@@ -43,7 +43,9 @@ class Location extends Component {
         return (
           <Segment>
             <Divider horizontal>Your Location</Divider>
-            <CityState name={this.state.name} current={ this.props.current ? true : null }/>
+            <Header>
+              <CityState name={this.state.name} current={ this.props.current ? true : null }/>
+            </Header>
             <Weather temp={this.state.temp} description={this.state.description}/>
             <Icon description={this.state.description}/>
           </Segment>
@@ -54,7 +56,9 @@ class Location extends Component {
             <List.Content floated='right'>
               <Button onClick={() => this.props.handleRemove(this.props.id)}>Remove Location</Button>
             </List.Content>
-            <Icon description={this.state.description}/>
+            <List.Content floated='left'>
+              <Icon description={this.state.description}/>
+            </List.Content>
             <List.Content>
               <List.Header>
                 <CityState name={this.state.name} current={ this.props.current ? true : null }/>
