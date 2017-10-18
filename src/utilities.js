@@ -12,4 +12,8 @@ function fahrenheitToCelcius(temp) {
   return ((temp - 32) / 1.8).toFixed(2);
 }
 
-export { capitalizeEachWord, celciusToFahrenheit, fahrenheitToCelcius };
+function kelvinToFahrenheit(temp) {
+  return ((9/5) * (temp - 273) + 32).toFixed(0);
+}
+
+export { capitalizeEachWord, celciusToFahrenheit, fahrenheitToCelcius, kelvinToFahrenheit };

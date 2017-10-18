@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Header } from 'semantic-ui-react';
 
 export default class CityState extends Component {
   constructor(props) {
@@ -7,25 +8,27 @@ export default class CityState extends Component {
   }
 
   componentDidMount() {
-    fetch('https://ipinfo.io', {
-      headers: {
-        'Accept': 'application/json'
-      }
-    }).then(response => {
-      return response.json();
-    }).then(data => {
-      this.setState({
-        city: data.city,
-        state: data.region
-      })
-    });
+    if (this.props.current) {
+      fetch('https://ipinfo.io', {
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        return response.json();
+      }).then(data => {
+        this.setState({
+          city: data.city,
+          state: data.region
+        })
+      });
+    } else {
+      this.setState({city: this.props.name})
+    }
   }
 
   render() {
     return (
-      <div id="city-state">
-        <h3>{this.state.city}, {this.state.state}</h3>
-      </div>
+      <span>{this.state.city}, {this.state.state}</span>
     );
   };
 }
