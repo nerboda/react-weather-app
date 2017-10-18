@@ -13,6 +13,8 @@ function locationListReducer(state = initialState, action) {
           {
             latitude: action.latitude,
             longitude: action.longitude,
+            zip: action.zip,
+            name: action.name,
             id: state.locations.length === 0 ? 1 : _.last(state.locations).id + 1
           }
         ]

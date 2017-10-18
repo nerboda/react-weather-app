@@ -2,14 +2,11 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import createFragment from 'react-addons-create-fragment';
-import Header from './components/header';
 import LoadScreen from './components/loadScreen';
 import Location from './components/location';
 import LocationList from './components/locationList';
 import { capitalizeEachWord } from './utilities';
-import { Divider, Segment, Container } from 'semantic-ui-react';
-import { createStore } from 'redux';
-import locationListReducer from './reducers';
+import { Divider, Segment, Container, Header } from 'semantic-ui-react';
 import { addLocation, removeLocation } from './actions';
 
 import 'semantic-ui-css/semantic.min.css';
@@ -52,8 +49,6 @@ Flow:
 
 */
 
-const store = createStore(locationListReducer);
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -75,10 +70,14 @@ class App extends Component {
     if (this.state.latitude) {
       return (
         <div>
-          <Header/>
-          <Container>
-            <Location latitude={this.state.latitude} longitude={this.state.longitude} current/>
-            <LocationList locations={store.getState().locations} addLocation={(location) => store.dispatch(addLocation(location))}/>
+          <Container className='padded' textAlign='center'>
+          <Header as='h1' size='huge'>Local Weather</Header>
+          <Location
+            latitude={this.state.latitude}
+            longitude={this.state.longitude}
+            current />
+          <Header>Add More Locations</Header>
+            <LocationList />
           </Container>
         </div>
       );
