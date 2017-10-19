@@ -2,11 +2,10 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import createFragment from 'react-addons-create-fragment';
-import LoadScreen from './components/loadScreen';
 import Location from './components/location';
 import LocationList from './components/locationList';
 import { capitalizeEachWord } from './utilities';
-import { Divider, Segment, Container, Header } from 'semantic-ui-react';
+import { Divider, Segment, Container, Header, Loader } from 'semantic-ui-react';
 import { addLocation, removeLocation } from './actions';
 
 import 'semantic-ui-css/semantic.min.css';
@@ -25,11 +24,11 @@ class App extends Component {
     navigator.geolocation.getCurrentPosition(position => {
       const {latitude, longitude} = position.coords;
       this.setState({latitude, longitude});
+      
+      setTimeout(function() {
+        document.getElementById('load-screen').remove();    
+      }, 500);
     });
-  }
-
-  componentDidMount() {
-    document.getElementById('load-screen').remove();
   }
 
   render() {
@@ -44,20 +43,17 @@ class App extends Component {
               current />
           </Container>
           <Container>
-            <LocationList />
+            <LocationList/>
           </Container>
         </div>
       );
     } else {
-      return <Header/>
+      return <Loader active content='Loading'/>
     }
   }
 }
 
 ReactDOM.render(
-  <div>
-    <LoadScreen/>
-    <App/>
-  </div>,
+  <App/>,
   document.getElementById('app')
 );
