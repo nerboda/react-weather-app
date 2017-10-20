@@ -24,10 +24,6 @@ class App extends Component {
     navigator.geolocation.getCurrentPosition(position => {
       const {latitude, longitude} = position.coords;
       this.setState({latitude, longitude});
-      
-      setTimeout(function() {
-        document.getElementById('load-screen').remove();    
-      }, 500);
     });
   }
 

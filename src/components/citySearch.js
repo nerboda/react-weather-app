@@ -1,17 +1,16 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import { Search, Grid, Header, Container } from 'semantic-ui-react'
-
-const source = [];
+import { Search, Grid, Header, Container, Icon, Button } from 'semantic-ui-react'
 
 export default class CitySearch extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchResults: [] };
+    this.state = { value: this.props.value, searchResults: [], icon: 'search' };
     this.componentWillMount = this.componentWillMount.bind(this);
     this.resetComponent = this.resetComponent.bind(this);
     this.handleResultSelect = this.handleResultSelect.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.renderResults = this.renderResults.bind(this);
   }
 
   componentWillMount() {
@@ -19,11 +18,12 @@ export default class CitySearch extends Component {
   }
 
   resetComponent() {
-    this.setState({ isLoading: false, results: [], value: '' })
+    this.setState({ isLoading: false, results: [], value: '', icon: 'search' })
   }
 
   handleResultSelect(e, { result }) {
-    this.setState({ value: result.title })
+    this.props.onSubmit(result.title);
+    this.resetComponent();
   }
 
   handleSearchChange(e, { value }) {
@@ -42,6 +42,25 @@ export default class CitySearch extends Component {
     }
   }
 
+  renderResults(props) {
+    const resultButton = (
+      <Button
+        compact
+        icon='add'
+        floated='right'
+        name='add'
+      />
+    );
+
+    return (
+      <Search.Result
+        title={props.title}
+        renderer={({title}) => (
+          <div className='title'>{title}{resultButton}</div>
+        )} />
+    );
+  }
+
   render() {
     const { isLoading, value, results } = this.state
 
@@ -55,9 +74,12 @@ export default class CitySearch extends Component {
           value={value}
           minCharacters={3}
           aligned='right'
+          icon={this.state.icon}
+          placeholder='Enter City or Zip'
+          resultRenderer={this.renderResults}
           {...this.props}
         />
       </div>
-    )
+    );
   }
 }

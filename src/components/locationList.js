@@ -46,7 +46,7 @@ class LocationList extends Component {
 
   render() {
     const locations = store.getState().locations;
-    
+
     return (
       <Segment>
         <Divider horizontal>Add More Locations</Divider>
@@ -65,7 +65,10 @@ class LocationList extends Component {
         </List>
         <Container textAlign='center'>
           <Form onSubmit={this.addLocation}>
-            <CitySearch onChange={this.handleChange} />
+            <CitySearch
+              onSubmit={this.addLocation}
+              onChange={this.handleChange}
+            />
           </Form>
         </Container>
       </Segment>
